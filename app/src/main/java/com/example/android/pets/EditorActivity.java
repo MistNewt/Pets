@@ -16,11 +16,12 @@
 package com.example.android.pets;
 
 import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,25 +31,34 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.android.pets.data.PetContract;
 import com.example.android.pets.data.PetContract.PetEntry;
-import com.example.android.pets.data.PetDbHelper;
 
 /**
  * Allows user to create a new pet or edit an existing one.
  */
 public class EditorActivity extends AppCompatActivity {
 
-    /** EditText field to enter the pet's name */
+    //Log tag for log messages
+    public static final String LOG_TAG = EditorActivity.class.getSimpleName();
+
+    /**
+     * EditText field to enter the pet's name
+     */
     private EditText mNameEditText;
 
-    /** EditText field to enter the pet's breed */
+    /**
+     * EditText field to enter the pet's breed
+     */
     private EditText mBreedEditText;
 
-    /** EditText field to enter the pet's weight */
+    /**
+     * EditText field to enter the pet's weight
+     */
     private EditText mWeightEditText;
 
-    /** EditText field to enter the pet's gender */
+    /**
+     * EditText field to enter the pet's gender
+     */
     private Spinner mGenderSpinner;
 
     /**
@@ -110,7 +120,7 @@ public class EditorActivity extends AppCompatActivity {
         });
     }
 
-    private long insertPet() {
+    private void insertPet() {
         //Get the respective fields
         String name = mNameEditText.getText().toString().trim();
         String breed = mBreedEditText.getText().toString().trim();
@@ -118,15 +128,19 @@ public class EditorActivity extends AppCompatActivity {
 
         //Create key-value pairs
         ContentValues values = new ContentValues();
-        values.put(PetEntry.COLUMN_PET_NAME,name);
-        values.put(PetEntry.COLUMN_PET_BREED,breed);
-        values.put(PetEntry.COLUMN_PET_GENDER,mGender);
-        values.put(PetEntry.COLUMN_PET_WEIGHT,weight);
+        values.put(PetEntry.COLUMN_PET_NAME, name);
+        values.put(PetEntry.COLUMN_PET_BREED, breed);
+        values.put(PetEntry.COLUMN_PET_GENDER, mGender);
+        values.put(PetEntry.COLUMN_PET_WEIGHT, weight);
 
-        //get database object
-        PetDbHelper dbHelper = new PetDbHelper(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        return db.insert(PetEntry.TABLE_NAME,null,values);
+        Uri newUri = getContentResolver().insert(PetEntry.CONTENT_URI, values);
+        //Display appropriate toast message
+        if (newUri == null)
+            Toast.makeText(this, getString(R.string.editor_pet_saving_failed),
+                    Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(this, getString(R.string.editor_pet_saved_successful),
+                    Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -144,11 +158,9 @@ public class EditorActivity extends AppCompatActivity {
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
                 //Insert new pet
-                long newRowId = insertPet();
+                insertPet();
                 //Return to parent activity
                 finish();
-                //Toast msg denoting new inserted row's id
-                Toast.makeText(this,"New row id: "+newRowId,Toast.LENGTH_SHORT).show();
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
