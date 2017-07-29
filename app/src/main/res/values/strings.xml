@@ -67,9 +67,44 @@
     <!-- Pet saving failed message -->
     <string name="editor_pet_saving_failed">Error with saving</string>
 
+    <!-- Pet updated message -->
+    <string name="editor_pet_updated">Pet Updated!</string>
+
+    <!-- Pet update failed message -->
+    <string name="editor_pet_update_failed">Pet updation failed.</string>
+
     <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
     <string name="empty_view_title_text">It\'s a bit lonely here...</string>
 
     <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=50] -->
     <string name="empty_view_subtitle_text">Get started by adding a pet</string>
+
+    <!-- Unsaved changes alert message -->
+    <string name="unsaved_changes_alert">Discard your changes and quit editing?</string>
+
+    <!-- Discard changes alert dialog selection -->
+    <string name="discard">Discard</string>
+
+    <!-- Keep editing alert dialog selection -->
+    <string name="keep_editing">Keep editing</string>
+
+    <!-- Toast message in editor when current pet was successfully deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_pet_successful">Pet deleted</string>
+
+    <!-- Toast message in editor when current pet has failed to be deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_pet_failed">Error with deleting pet</string>
+
+    <!-- Dialog message to ask the user to confirm deleting the current pet [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg">Delete this pet?</string>
+
+    <!-- Dialog message to ask to user to confirm deletion of all pets -->
+    <string name="delete_all_dialog_msg">Delete all pets?</string>
+    <!-- Dialog button text for the option to confirm deleting the current pet [CHAR LIMIT=20] -->
+    <string name="delete">Delete</string>
+
+    <!-- Dialog button text for the option to cancel deletion of the current pet [CHAR LIMIT=20] -->
+    <string name="cancel">Cancel</string>
+
+    <!-- Unknown gender summary field -->
+    <string name="unknown_breed">Unknown breed</string>
 </resources>
