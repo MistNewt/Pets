@@ -1,8 +1,8 @@
 Pets App
 ===================================
 
-This app was copied from https://github.com/udacity/ud845-Pets/ with
-starter code. After then too, many modification were made/copy-pasted by me.
+This app was copied from https://github.com/udacity/ud845-Pets/ with <br/>
+starter code. From that point, many modification were made/copy-pasted by me.
 
 P.S. I am now officially a basic android developer. Yayyy. :)
 
